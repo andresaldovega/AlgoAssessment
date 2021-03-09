@@ -1,6 +1,10 @@
 namespace TGS.Challenge
 {
-  /*
+    using System;
+    using System.Linq;
+    using System.Text.RegularExpressions;
+
+    /*
         Devise a function that checks if 1 word is an anagram of another, if the words are anagrams of
         one another return true, else return false
 
@@ -24,7 +28,23 @@ namespace TGS.Challenge
     {
       public bool AreAnagrams(string word1, string word2)
       {
-        return false;
+          const string charsToIgnore = "[@,\\.!?_ ']";
+
+          if (string.IsNullOrWhiteSpace(word1) || string.IsNullOrWhiteSpace(word2))
+          {
+                throw new ArgumentException();
+          }
+
+          var cleanedWord1 = Regex.Replace(word1, charsToIgnore, string.Empty).ToLower();
+          var cleanedWord2 = Regex.Replace(word2, charsToIgnore, string.Empty).ToLower();
+
+          var word1CharArray = cleanedWord1.ToCharArray();
+          var word2CharArray = cleanedWord2.ToCharArray();
+
+          Array.Sort(word1CharArray);
+          Array.Sort(word2CharArray);
+
+          return word1CharArray.SequenceEqual(word2CharArray);
       }
     }
 }

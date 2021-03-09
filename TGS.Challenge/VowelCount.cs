@@ -2,6 +2,8 @@ using System;
 
 namespace TGS.Challenge
 {
+    using System.Text.RegularExpressions;
+
     /*
         Devise a function that takes a string & returns the number of 
         vowels (aeiou) in that string.
@@ -16,7 +18,10 @@ namespace TGS.Challenge
     {
         public int Count(string value)
         {
-            return -1;
+            if (string.IsNullOrWhiteSpace(value)){ 
+                throw  new ArgumentException(nameof(value));
+            }
+            return Regex.Matches(value, @"[AEIOUaeiou]").Count;
         }
     }
 }

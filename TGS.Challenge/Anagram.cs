@@ -30,9 +30,14 @@ namespace TGS.Challenge
       {
           const string charsToIgnore = "[@,\\.!?_ ']";
 
-          if (string.IsNullOrWhiteSpace(word1) || string.IsNullOrWhiteSpace(word2))
+          if (string.IsNullOrWhiteSpace(word1))
           {
-                throw new ArgumentException();
+                throw new ArgumentException(nameof(word1));
+          }
+
+          if (string.IsNullOrWhiteSpace(word2))
+          {
+              throw new ArgumentException(nameof(word2));
           }
 
           var cleanedWord1 = Regex.Replace(word1, charsToIgnore, string.Empty).ToLower();
